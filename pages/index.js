@@ -9,19 +9,20 @@ export default function Home() {
   const [noClickCount, setNoClickCount] = useState(0);
   const [noPosition, setNoPosition] = useState({ x: 0, y: 0 });
   const [moved, setMoved] = useState(false);
+  const [yesSize, setYesSize] = useState(1);
 
   const handleNoClick = () => {
     setShake(true);
     setNoClickCount(prevCount => prevCount + 1);
     setTimeout(() => setShake(false), 500);
     
+    setYesSize(prevSize => prevSize + 0.2);
+    
     if (!moved) {
-      setNoPosition({ x: 0, y: 0 }); // Keep initial position
       setMoved(true);
     } else {
-      // Move the No button to the corners after the first click
-      const newX = Math.random() > 0.5 ? 200 : -200;
-      const newY = Math.random() > 0.5 ? 200 : -200;
+      const newX = Math.random() > 0.5 ? 300 : -300;
+      const newY = Math.random() > 0.5 ? 300 : -300;
       setNoPosition({ x: newX, y: newY });
     }
     
@@ -42,11 +43,22 @@ export default function Home() {
 
       <main>
         <h1>Will You Be My Valentine? ❤️</h1>
-        <button className="yes" onClick={() => router.push("/yes")}>Yes</button>
+        <button 
+          className="yes"
+          style={{ transform: `scale(${yesSize})` }}
+          onClick={() => router.push("/yes")}
+        >
+          Yes
+        </button>
         <button 
           className={`no ${shake ? "shake" : ""}`} 
           onClick={handleNoClick} 
-          style={{ transform: `translate(${noPosition.x}px, ${noPosition.y}px)`, position: moved ? 'absolute' : 'relative' }}
+          style={{ 
+            transform: `translate(${noPosition.x}px, ${noPosition.y}px)`, 
+            position: moved ? 'absolute' : 'relative',
+            top: moved ? 'auto' : '10px',
+            left: moved ? 'auto' : '0'
+          }}
         >
           No
         </button>
