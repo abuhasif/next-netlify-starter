@@ -6,10 +6,22 @@ import Hearts from "../components/Hearts";
 export default function Home() {
   const router = useRouter();
   const [shake, setShake] = useState(false);
+  const [noClickCount, setNoClickCount] = useState(0);
+  const [noPosition, setNoPosition] = useState({ x: 0, y: 0 });
 
   const handleNoClick = () => {
     setShake(true);
+    setNoClickCount(prevCount => prevCount + 1);
     setTimeout(() => setShake(false), 500);
+    
+    // Move the No button to a random position
+    const newX = Math.random() * 200 - 100; // Random X offset
+    const newY = Math.random() * 200 - 100; // Random Y offset
+    setNoPosition({ x: newX, y: newY });
+    
+    if (noClickCount >= 2) {
+      alert("Too many attempts! Give me a chance! 😢");
+    }
   };
 
   return (
@@ -25,7 +37,13 @@ export default function Home() {
       <main>
         <h1>Will You Be My Valentine? ❤️</h1>
         <button className="yes" onClick={() => router.push("/yes")}>Yes</button>
-        <button className={`no ${shake ? "shake" : ""}`} onClick={handleNoClick}>No</button>
+        <button 
+          className={`no ${shake ? "shake" : ""}`} 
+          onClick={handleNoClick} 
+          style={{ transform: `translate(${noPosition.x}px, ${noPosition.y}px)` }}
+        >
+          No
+        </button>
       </main>
 
       <style jsx>{`
@@ -57,6 +75,7 @@ export default function Home() {
         .no {
           background-color: #f44336;
           color: white;
+          position: absolute;
         }
         .yes:hover {
           background-color: #45a049;
