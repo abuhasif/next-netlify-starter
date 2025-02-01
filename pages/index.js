@@ -8,16 +8,22 @@ export default function Home() {
   const [shake, setShake] = useState(false);
   const [noClickCount, setNoClickCount] = useState(0);
   const [noPosition, setNoPosition] = useState({ x: 0, y: 0 });
+  const [moved, setMoved] = useState(false);
 
   const handleNoClick = () => {
     setShake(true);
     setNoClickCount(prevCount => prevCount + 1);
     setTimeout(() => setShake(false), 500);
     
-    // Move the No button to a random position
-    const newX = Math.random() * 200 - 100; // Random X offset
-    const newY = Math.random() * 200 - 100; // Random Y offset
-    setNoPosition({ x: newX, y: newY });
+    if (!moved) {
+      setNoPosition({ x: 0, y: 0 }); // Keep initial position
+      setMoved(true);
+    } else {
+      // Move the No button to the corners after the first click
+      const newX = Math.random() > 0.5 ? 200 : -200;
+      const newY = Math.random() > 0.5 ? 200 : -200;
+      setNoPosition({ x: newX, y: newY });
+    }
     
     if (noClickCount >= 2) {
       alert("Too many attempts! Give me a chance! 😢");
@@ -40,7 +46,7 @@ export default function Home() {
         <button 
           className={`no ${shake ? "shake" : ""}`} 
           onClick={handleNoClick} 
-          style={{ transform: `translate(${noPosition.x}px, ${noPosition.y}px)` }}
+          style={{ transform: `translate(${noPosition.x}px, ${noPosition.y}px)`, position: moved ? 'absolute' : 'relative' }}
         >
           No
         </button>
@@ -75,7 +81,6 @@ export default function Home() {
         .no {
           background-color: #f44336;
           color: white;
-          position: absolute;
         }
         .yes:hover {
           background-color: #45a049;
