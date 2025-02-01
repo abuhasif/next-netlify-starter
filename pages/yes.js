@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import confetti from "canvas-confetti";
+import Hearts from "../components/Hearts";
 
 export default function Yes() {
   const audioRef = useRef(null);
@@ -18,9 +19,10 @@ export default function Yes() {
 
   return (
     <div style={{ textAlign: "center", padding: "50px" }}>
+      <Hearts />
       <h1>Yay! You made my day! ❤️</h1>
       <audio ref={audioRef} loop>
-        <source src="/music/love-song.mp3" type="audio/mp3" />
+        <source src="/pages/Replay.mp3" type="audio/mp3" />
         Your browser does not support the audio element.
       </audio>
       <img 
