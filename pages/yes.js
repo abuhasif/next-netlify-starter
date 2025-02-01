@@ -60,7 +60,7 @@ export default function Yes() {
           position: absolute;
           width: 100vw;
           height: 100vh;
-          background: url("https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif") no-repeat center center/cover;
+          background: url("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzJieWgwYXd2bnV3dGx4MGVsMXg2bXpxZzdnaGpxYWlkaWF6OXlsdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1OrIIOIcRTDaNidc5p/giphy.gif") no-repeat center center/cover;
           animation: fireworks 2s ease-in-out infinite;
         }
       `}</style>
