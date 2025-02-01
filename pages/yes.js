@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Hearts from "../components/Hearts";
@@ -17,7 +17,12 @@ export default function Yes() {
     });
 
     if (audioRef.current) {
-      audioRef.current.play();
+      const playAudio = () => {
+        audioRef.current.play().catch((err) => {
+          console.log("Autoplay blocked, requiring user interaction:", err);
+        });
+      };
+      document.addEventListener("click", playAudio, { once: true });
     }
 
     setTimeout(() => setShowMessage(true), 2000);
@@ -32,7 +37,7 @@ export default function Yes() {
       )}
       <h1>Yay! You made my day! ❤️</h1>
       <audio ref={audioRef} loop>
-        <source src="/pages/Replay.mp3" type="audio/mp3" />
+        <source src="/Replay.mp3" type="audio/mp3" />
         Your browser does not support the audio element.
       </audio>
       <img 
@@ -61,7 +66,7 @@ export default function Yes() {
           width: 100vw;
           height: 100vh;
           background: url("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzJieWgwYXd2bnV3dGx4MGVsMXg2bXpxZzdnaGpxYWlkaWF6OXlsdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1OrIIOIcRTDaNidc5p/giphy.gif") no-repeat center center/cover;
-          animation: fireworks 5s ease-in-out infinite;
+          animation: fireworks 4s ease-in-out infinite;
         }
       `}</style>
     </div>

@@ -16,7 +16,7 @@ export default function Home() {
     setNoClickCount(prevCount => prevCount + 1);
     setTimeout(() => setShake(false), 500);
     
-    setYesSize(prevSize => prevSize + 0.2);
+    setYesSize(prevSize => prevSize + 0.4);
     
     if (!moved) {
       setMoved(true);
@@ -26,7 +26,7 @@ export default function Home() {
       setNoPosition({ x: newX, y: newY });
     }
     
-    if (noClickCount >= 2) {
+    if (noClickCount >= 3) {
       alert("Too many attempts! Give me a chance! 😢");
     }
   };
