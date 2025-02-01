@@ -50,7 +50,7 @@ export default function Home() {
         .container {
           text-align: center;
           padding: 50px;
-          background-color: #ffcccb;
+          background: url("https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTl6bHVrMWQ4Y2tkZ28xOGl0ZmE3emU5NTJha2Q0cDQ5enhtMzUyYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lTe2eQDZyoAq1mH4HK/giphy.gif") no-repeat center center/cover;
           height: 100vh;
           display: flex;
           flex-direction: column;
