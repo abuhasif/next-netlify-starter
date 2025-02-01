@@ -1,8 +1,15 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { useState } from "react";
+import { useRouter } from "next/router";
+import Head from "next/head";
 
 export default function Home() {
   const router = useRouter();
+  const [shake, setShake] = useState(false);
+
+  const handleNoClick = () => {
+    setShake(true);
+    setTimeout(() => setShake(false), 500);
+  };
 
   return (
     <div className="container">
@@ -14,27 +21,14 @@ export default function Home() {
 
       <main>
         <h1>Will You Be My Valentine? ❤️</h1>
-        <button className="yes" onClick={() => router.push('/yes')}>Yes</button>
-        <button className="no" onClick={() => router.push('/no')}>No</button>
+        <button className="yes" onClick={() => router.push("/yes")}>Yes</button>
+        <button className={`no ${shake ? "shake" : ""}`} onClick={handleNoClick}>No</button>
       </main>
 
       <style jsx>{`
-        body {
-          font-family: Arial, sans-serif;
-          text-align: center;
-          background-color: #ffcccb;
-          margin: 0;
-          height: 100vh;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
         .container {
-          background: white;
-          padding: 20px;
-          border-radius: 10px;
-          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+          text-align: center;
+          padding: 50px;
         }
         button {
           padding: 10px 20px;
@@ -43,6 +37,7 @@ export default function Home() {
           cursor: pointer;
           border: none;
           border-radius: 5px;
+          transition: transform 0.2s;
         }
         .yes {
           background-color: #4CAF50;
@@ -51,6 +46,16 @@ export default function Home() {
         .no {
           background-color: #f44336;
           color: white;
+        }
+        .shake {
+          animation: shake 0.5s;
+        }
+        @keyframes shake {
+          0% { transform: translateX(0); }
+          25% { transform: translateX(-5px); }
+          50% { transform: translateX(5px); }
+          75% { transform: translateX(-5px); }
+          100% { transform: translateX(0); }
         }
       `}</style>
     </div>
